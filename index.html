@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Timer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <form action="">
+
+            <ul class="flex-outer">
+
+                <li>
+                    <label for="">Countdown:</label>
+                    <p id="time_left">0</p>
+                </li>
+
+                <li>
+                    <label for="time_input">Timer:</label>
+                    <input type="time" name="time_input" id="time_input" step="1" required>
+                </li>
+
+                <!-- <li>
+                    <label for="start_time_ms">Start Time MS:</label>
+                    <input type="number" name="start_time_ms" id="start_time_ms">
+                </li> -->
+
+                <li>
+                    <label for="time_left_ms" hidden>Time Left MS:</label>
+                    <input type="number" name="time_left_ms" id="time_left_ms" hidden readonly>
+                </li>
+
+                <li>
+                    <button id="start_button">Start</button>
+                    <button id="reset_button">Reset</button>
+                </li>
+
+            </ul>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
