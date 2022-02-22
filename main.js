@@ -27,19 +27,10 @@ const start_timer = (e) => {
     urlParams.set('timer', duration_ms);
     urlParams.set('start', start_time_ms);
     window.location.search = urlParams;
-
-    // start_time_label.value = start_time_ms;
-    // show_time_left();
 }
 
 const attach_to_timer = () => {
-    // const attach_to_timer = (e) => {
-    // if (duration_ms === undefined) return;
-
     clearInterval(interval);
-    // start_time_ms = parseInt(start_time_label.value);
-    // e.preventDefault();
-
     show_time_left();
 }
 
@@ -101,7 +92,6 @@ const init = () => {
     time_left_label = document.getElementById("time_left");
 
     time_input = document.getElementById("time_input");
-    // start_time_label = document.getElementById("start_time_ms");
 
     time_left_ms_label.value = '';
     time_left_label.value = '';
