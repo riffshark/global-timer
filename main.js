@@ -1,6 +1,9 @@
 let start_time_ms = 0;
 let duration_ms = 10000;
 
+let original_offset;
+let current_offset;
+
 let interval;
 
 // ui
@@ -20,12 +23,15 @@ const start_timer = (e) => {
 
     clearInterval(interval);
     start_time_ms = Date.now();
+    original_offset = new Date().getTimezoneOffset();
     e.preventDefault();
 
     // set url
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('timer', duration_ms);
     urlParams.set('start', start_time_ms);
+    urlParams.set('originaloffset', original_offset);
+
     window.location.search = urlParams;
 }
 
@@ -38,7 +44,8 @@ const attach_to_timer = () => {
 
 const each_frame = () => {
     const time_now = Date.now();
-    let time_left_ms = start_time_ms + duration_ms - time_now;
+    let time_left_ms = start_time_ms - (original_offset * 60 * 1000) + duration_ms - time_now + (current_offset * 60 * 1000);
+    current_offset = new Date().getTimezoneOffset();
 
     if (time_left_ms <= 0) {
         clearInterval(interval);
@@ -79,6 +86,7 @@ const reset = (e) => {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.delete('timer', duration_ms);
     urlParams.delete('start', start_time_ms);
+    urlParams.delete('originaloffset', start_time_ms);
 
     window.location.search = urlParams;
 
@@ -104,9 +112,11 @@ const init = () => {
     // IF params are set => attach 
     const urlParams = new URLSearchParams(window.location.search);
 
-    if (urlParams.has("timer") && urlParams.has("start")) {
+    if (urlParams.has("timer") && urlParams.has("start") 
+        && urlParams.has("originaloffset")) {
         duration_ms = parseInt(urlParams.get("timer"));
         start_time_ms = parseInt(urlParams.get("start"));
+        original_offset = parseInt(urlParams.get("originaloffset"));
         attach_to_timer();
     }
 }
